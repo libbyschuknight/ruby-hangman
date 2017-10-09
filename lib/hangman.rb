@@ -17,7 +17,7 @@ class Hangman
   def play_game
     print_message("You have #{lives} lives left 😱")
     print_message("Pick a letter: ")
-    letter = gets.chomp.downcase
+    letter = UserInput.new.letter
     letter_correct?(letter)
     print_message("\n 🎊 🎊 🎊   Yay! You got it right! You win! Congrats!   🎉🎉🎉 \n >>>> GAME OVER <<<<") if word_correct?
     print_message("\n 😟   Oh no! You lose!  😭 \n >>>> GAME OVER <<<<") if dead?
