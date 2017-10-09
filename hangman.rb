@@ -1,10 +1,10 @@
 class Hangman
   attr_reader :word, :correct_letters
-  attr_accessor :turns
+  attr_accessor :lives
 
   def initialize(word)
     @word = word.chars
-    @turns = 8
+    @lives = 8
     @correct_letters = []
   end
 
@@ -15,12 +15,12 @@ class Hangman
   end
 
   def play_game
-    print_message("You have #{turns} turns left")
+    print_message("You have #{lives} lives left 😱")
     print_message("Pick a letter: ")
     letter = gets.chomp.downcase
     letter_correct?(letter)
-    print_message("🎊 🎊 🎊   Yay! You got it right! You win! Congrats!   🎉🎉🎉") if word_correct?
-    print_message("Oh no! You lose!") if dead?
+    print_message("\n 🎊 🎊 🎊   Yay! You got it right! You win! Congrats!   🎉🎉🎉 \n >>>> GAME OVER <<<<") if word_correct?
+    print_message("\n 😟   Oh no! You lose!  😭 \n >>>> GAME OVER <<<<") if dead?
   end
 
   def game_over?
@@ -44,8 +44,8 @@ class Hangman
   end
 
   def remove_life_print_message
-    self.turns -= 1
-      print_message("Oh no, try again")
+    self.lives -= 1
+    print_message("That letter is not in the word.")
     false
   end
 
@@ -54,7 +54,7 @@ class Hangman
   end
 
   def dead?
-    turns.zero?
+    lives.zero?
   end
 
   def print_message(message)
@@ -67,9 +67,9 @@ class Hangman
   end
 
   def display_word
-    word.map do |word_letter|
-      if correct_letters.include?(word_letter)
-        "#{word_letter} "
+    word.map do |letter|
+      if correct_letters.include?(letter)
+        "#{letter} "
       else
         "_ "
       end
