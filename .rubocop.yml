@@ -1,0 +1,45 @@
+###########################
+# Configuration for rubocop
+# in .rubocop.yml
+# Most of these are disabling existing cops, primarily
+# due to a smattering of different styles and loose
+# guidlines for contributions.
+#
+# Any of these may be changed.
+
+
+# StringLiterals:
+#   Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/WordArray:
+  Enabled: false
+Metrics/LineLength:
+  Enabled: false
+Style/TrailingCommaInLiteral:
+  Enabled: false
+Style/TrailingCommaInArguments:
+  Enabled: false
+Style/EmptyLinesAroundClassBody:
+  Enabled: false
+Style/EmptyLinesAroundModuleBody:
+  Enabled: false
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
+Style/RegexpLiteral:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Style/TrivialAccessors:
+  AllowPredicates: true
+Style/BracesAroundHashParameters:
+  Enabled: false
+Style/IndentHash:
+  Enabled: false
+Style/NumericLiterals:
+  Enabled: false
