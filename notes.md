@@ -3,16 +3,22 @@
   - with a script command?
 
 - As a hangman player, I would like to see some indication of how many letters there are in the word that I am supposed to guess
-  - done with showing dashes
+  - done ✅
 
 - As a hangman player, I want to submit one letter guesses and be told whether my guess is either in the word, not in the word, or already guessed
   - one letter guesses ❌
+    -
   - not in word ✅
   - in the word ✅
-  - already guessed ❌  
+  - already guessed ❌
+    - 
 
 - As a hangman player, I want the game to handle bad input (like numbers, symbols, and letters I've previously guessed) gracefully and with an appropriate error message so that I am not punished unduly for mistakes
   - TODO ❌
+  - error class
+    - handles bad input, returns nice message
+    - standard error
+    - result object?
 
 - As a hangman player, I want to see the letters I've guessed correctly revealed on the hidden word that I am trying to guess so that I can guess the word more readily
   - done ✅

@@ -76,6 +76,3 @@ class Hangman
     end
   end
 end
-
-new_game = Hangman.new("powershop")
-new_game.start
