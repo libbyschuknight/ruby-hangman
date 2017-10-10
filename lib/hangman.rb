@@ -1,11 +1,12 @@
 class Hangman
-  attr_reader :word, :correct_letters_array, :output
+  attr_reader :word, :correct_letters_array, :output, :incorrect_letters_array
   attr_accessor :lives
 
   def initialize(word)
     @word = word.chars
     @lives = 8
     @correct_letters_array = []
+    @incorrect_letters_array = []
     @output = Output.new
   end
 
@@ -22,14 +23,16 @@ class Hangman
     letter = UserInput.new.letter
 
     if correct_letter?(letter)
-      collect_correct_letters(letter)
+      correct_letters(letter)
       output.correct_letter
     else
+      incorrect_letters(letter)
       remove_life
       output.incorrect_letter
     end
 
     output.display_word(guessed_word)
+    output.display_incorrect_words(incorrect_letters_array)
 
     output.win if word_correct?
     output.lose if dead?
@@ -44,14 +47,16 @@ class Hangman
     letter_handler.letter_in_word?(letter: letter, word: word)
   end
 
-  def collect_correct_letters(letter)
+  def correct_letters(letter)
     correct_letters_array << letter
   end
 
+  def incorrect_letters(letter)
+    incorrect_letters_array << letter
+  end
+
   def remove_life
-    # QUESTION: why self instead of @?
     self.lives -= 1
-    false
   end
 
   def word_correct?

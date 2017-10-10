@@ -36,6 +36,11 @@ class Output
     print(word)
   end
 
+  def display_incorrect_words(array)
+    letters = array.reject(&:empty?).uniq.join(", ")
+    print("Incorrect letters: #{letters}")
+  end
+
   def win
     print("\n 🎊 🎊 🎊   Yay! You got it right! You win! Congrats!   🎉🎉🎉  #{GAME_OVER}")
   end
