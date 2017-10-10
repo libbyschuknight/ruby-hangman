@@ -4,7 +4,7 @@ require "pry"
 
 require "hangman"
 require "user_input"
-require "message_output"
+require "output"
 require "letter_handler"
 
 
