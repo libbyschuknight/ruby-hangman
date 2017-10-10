@@ -1,9 +1,9 @@
 class Hangman
-  attr_reader :word, :correct_letters_array, :output, :incorrect_letters_array
+  attr_reader :word_array, :correct_letters_array, :output, :incorrect_letters_array
   attr_accessor :lives
 
   def initialize(word)
-    @word = word.chars
+    @word_array = word.chars
     @lives = 8
     @correct_letters_array = []
     @incorrect_letters_array = []
@@ -44,7 +44,7 @@ class Hangman
 
   def correct_letter?(letter)
     letter_handler = LetterHandler.new
-    letter_handler.letter_in_word?(letter: letter, word: word)
+    letter_handler.letter_in_word?(letter, word_array)
   end
 
   def correct_letters(letter)
@@ -60,7 +60,7 @@ class Hangman
   end
 
   def word_correct?
-    correct_letters_array.uniq.sort == word.uniq.sort
+    correct_letters_array.uniq.sort == word_array.uniq.sort
   end
 
   def dead?
@@ -68,7 +68,7 @@ class Hangman
   end
 
   def guessed_word
-    word.map do |letter|
+    word_array.map do |letter|
       if correct_letters_array.include?(letter)
         "#{letter} "
       else
