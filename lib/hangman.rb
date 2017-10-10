@@ -1,26 +1,32 @@
 class Hangman
-  attr_reader :word, :correct_letters
+  attr_reader :word, :correct_letters, :message
   attr_accessor :lives
 
   def initialize(word)
     @word = word.chars
     @lives = 8
     @correct_letters = []
+    @message = MessageOutput.new
   end
 
   def start
-    print_message("😃   LETS PLAY HANGMAN!!! 😜")
-    print_message(empty_word) # at the moment this will always be _ 's
+    message.print("😃   LETS PLAY HANGMAN!!! 😜")
+    message.print(empty_word) # at the moment this will always be _ 's
     play_game until game_over?
   end
 
   def play_game
-    print_message("You have #{lives} lives left 😱")
-    print_message("Pick a letter: ")
+    message.print("You have #{lives} lives left 😱")
+    message.print("Pick a letter: ")
     letter = UserInput.new.letter
+    # QUESTION: is it okay doing this or would it be better to do
+    # user_input = UserInput.new
+    # letter = user_input.letter
+    # or should I do something different in the class?
+
     letter_correct?(letter)
-    print_message("\n 🎊 🎊 🎊   Yay! You got it right! You win! Congrats!   🎉🎉🎉 \n >>>> GAME OVER <<<<") if word_correct?
-    print_message("\n 😟   Oh no! You lose!  😭 \n >>>> GAME OVER <<<<") if dead?
+    message.print("\n 🎊 🎊 🎊   Yay! You got it right! You win! Congrats!   🎉🎉🎉 \n >>>> GAME OVER <<<<") if word_correct?
+    message.print("\n 😟   Oh no! You lose!  😭 \n >>>> GAME OVER <<<<") if dead?
   end
 
   def game_over?
@@ -33,19 +39,20 @@ class Hangman
     else
       remove_life_print_message
     end
-    print_message(display_word.join)
+    message.print(display_word.join)
   end
 
   def collect_letters_print_message(letter)
     # don't feel great about moving this out into method, just moving code around
     correct_letters << letter
-    print_message("Cool, that letter is there!")
+    message.print("Cool, that letter is there!")
     true
   end
 
   def remove_life_print_message
+    # QUESTION: why self instead of @?
     self.lives -= 1
-    print_message("That letter is not in the word.")
+    message.print("That letter is not in the word.")
     false
   end
 
@@ -55,10 +62,6 @@ class Hangman
 
   def dead?
     lives.zero?
-  end
-
-  def print_message(message)
-    puts message
   end
 
   def empty_word
