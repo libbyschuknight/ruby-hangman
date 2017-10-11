@@ -1,8 +1,10 @@
+require 'io/console'
+
 class UserInput
   def initialize
   end
 
   def letter
-    gets.chomp.downcase
+    STDIN.getch.downcase
   end
 end
