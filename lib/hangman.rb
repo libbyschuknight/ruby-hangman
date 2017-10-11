@@ -1,86 +1,78 @@
 class Hangman
-  attr_reader :word_array, :correct_letters_array, :output, :incorrect_letters_array
+  attr_reader :letters, :correct_letters, :output, :incorrect_letters
   attr_accessor :lives
 
-  def initialize(word)
+  def initialize
     # game state
-    @word_array = word.chars # letters
+    @letters = random_word.chars
     @lives = 8
-    @correct_letters_array = []
-    @incorrect_letters_array = []
+    @correct_letters = []
+    @incorrect_letters = []
     @output = Output.new
   end
 
   def start
     output.play
-    output.display_word(guessed_word) # naming
+    output.display_word(partial_word_guess) # naming
     play_game until game_over?
   end
 
   private
 
   def play_game
+    # turn and game loop in here - pull out and make separate
+    # have turn separate to game loop
+    # this method is more like play_turn
+
     # main control loop
     output.lives_left(lives)
-    output.pick_letter # namingf - prompt
+    output.ask_to_pick_letter
 
     letter = UserInput.new.letter
 
     if correct_letter?(letter)
-      collect_letters(letter, correct_letters_array)
+      correct_letters << letter
       output.correct_letter
     else
-      collect_letters(letter, incorrect_letters_array)
+      incorrect_letters << letter
       remove_life
       output.incorrect_letter
     end
 
-    output.display_word(guessed_word)
-    output.display_incorrect_words(incorrect_letters_array)
+    output.display_word(partial_word_guess)
+    output.display_incorrect_words(incorrect_letters)
 
     # TODO: move out of here, don't need both?
     output.win if word_correct?
     output.lose if dead?
   end
 
+  def random_word
+    ["dog", "bananas", "cat", "powershop", "word"].sample
+  end
   def game_over?
     dead? || word_correct?
   end
 
   def correct_letter?(letter)
-    word_array.include?(letter)
+    letters.include?(letter)
   end
-
-  def collect_letters(letter, collection)
-    collection << letter
-    # just aliasing a method
-  end
-
-  # def correct_letters(letter)
-  #   # same as incorrect_letters, pass in collecting array
-  #   correct_letters_array << letter
-  # end
-  #
-  # def incorrect_letters(letter)
-  #   # same as correct_letters, pass in collecting array
-  #   incorrect_letters_array << letter
-  # end
 
   def remove_life
     self.lives -= 1
   end
 
   def word_correct?
-    correct_letters_array.uniq.sort == word_array.uniq.sort
+    correct_letters.uniq.sort == letters.uniq.sort
   end
 
   def dead?
     lives.zero?
   end
 
-  def guessed_word
-    word_array.map do |letter|
-      if correct_letters_array.include?(letter)
+  def partial_word_guess
+    letters.map do |letter|
+      if correct_letters.include?(letter)
         "#{letter} "
       else
         "_ "

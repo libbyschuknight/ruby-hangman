@@ -6,5 +6,5 @@ require "hangman"
 require "user_input"
 require "output"
 
-new_game = Hangman.new("powershop")
+new_game = Hangman.new
 new_game.start

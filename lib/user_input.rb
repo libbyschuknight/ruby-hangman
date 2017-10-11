@@ -1,9 +1,8 @@
 class UserInput
-  attr_reader :letter
-
-  def initialize(letter = gets.chomp.downcase)
-    @letter = letter
+  def initialize
   end
 
-  # TODO: anther method
+  def letter
+    gets.chomp.downcase
+  end
 end
