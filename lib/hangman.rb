@@ -1,35 +1,36 @@
 class Hangman
-  attr_reader :word_array, :correct_letters_array, :output, :incorrect_letters_array, :letter_handler
+  attr_reader :word_array, :correct_letters_array, :output, :incorrect_letters_array
   attr_accessor :lives
 
   def initialize(word)
     # game state
-    @word_array = word.chars
+    @word_array = word.chars # letters
     @lives = 8
     @correct_letters_array = []
     @incorrect_letters_array = []
     @output = Output.new
-    @letter_handler = LetterHandler.new
   end
 
   def start
     output.play
-    output.display_word(guessed_word)
+    output.display_word(guessed_word) # naming
     play_game until game_over?
   end
+
+  private
 
   def play_game
     # main control loop
     output.lives_left(lives)
-    output.pick_letter
+    output.pick_letter # namingf - prompt
 
     letter = UserInput.new.letter
 
     if correct_letter?(letter)
-      correct_letters(letter)
+      collect_letters(letter, correct_letters_array)
       output.correct_letter
     else
-      incorrect_letters(letter)
+      collect_letters(letter, incorrect_letters_array)
       remove_life
       output.incorrect_letter
     end
@@ -37,6 +38,7 @@ class Hangman
     output.display_word(guessed_word)
     output.display_incorrect_words(incorrect_letters_array)
 
+    # TODO: move out of here, don't need both?
     output.win if word_correct?
     output.lose if dead?
   end
@@ -46,16 +48,23 @@ class Hangman
   end
 
   def correct_letter?(letter)
-    letter_handler.letter_in_word?(letter, word_array)
+    word_array.include?(letter)
   end
 
-  def correct_letters(letter)
-    correct_letters_array << letter
+  def collect_letters(letter, collection)
+    collection << letter
+    # just aliasing a method
   end
 
-  def incorrect_letters(letter)
-    incorrect_letters_array << letter
-  end
+  # def correct_letters(letter)
+  #   # same as incorrect_letters, pass in collecting array
+  #   correct_letters_array << letter
+  # end
+  #
+  # def incorrect_letters(letter)
+  #   # same as correct_letters, pass in collecting array
+  #   incorrect_letters_array << letter
+  # end
 
   def remove_life
     self.lives -= 1

@@ -5,7 +5,6 @@ require "pry"
 require "hangman"
 require "user_input"
 require "output"
-require "letter_handler"
 
 new_game = Hangman.new("powershop")
 new_game.start

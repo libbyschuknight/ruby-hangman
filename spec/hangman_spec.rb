@@ -22,22 +22,36 @@ RSpec.describe Hangman do
   end
 
   describe "check to see if letter is correct" do
-    let(:letter_handler) { instance_double("LetterHandler") }
-
-    before do
-      allow(LetterHandler).to receive(:new).and_return(letter_handler)
-    end
-
     it "is correct" do
-      allow(letter_handler).to receive(:letter_in_word?).and_return(true)
       result = game.correct_letter?("r")
       expect(result).to eq(true)
     end
 
     it "is not correct" do
-      allow(letter_handler).to receive(:letter_in_word?).and_return(false)
       result = game.correct_letter?("f")
       expect(result).to eq(false)
     end
   end
+
+  describe "collecting letters" do
+    it "returns collection of letters" do
+      collection = []
+      result = game.collect_letters("r", collection)
+      expect(result).to eq(["r"])
+    end
+  end
+
+  # describe "correct letters" do
+  #   it "collects letters" do
+  #     result = game.correct_letters("r")
+  #     expect(result).to eq(["r"])
+  #   end
+  # end
+  #
+  # describe "incorrect letters letters" do
+  #   it "collects letters" do
+  #     result = game.incorrect_letters("r")
+  #     expect(result).to eq(["r"])
+  #   end
+  # end
 end
