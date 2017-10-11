@@ -1,13 +1,15 @@
 class Hangman
-  attr_reader :word_array, :correct_letters_array, :output, :incorrect_letters_array
+  attr_reader :word_array, :correct_letters_array, :output, :incorrect_letters_array, :letter_handler
   attr_accessor :lives
 
   def initialize(word)
+    # game state
     @word_array = word.chars
     @lives = 8
     @correct_letters_array = []
     @incorrect_letters_array = []
     @output = Output.new
+    @letter_handler = LetterHandler.new
   end
 
   def start
@@ -17,6 +19,7 @@ class Hangman
   end
 
   def play_game
+    # main control loop
     output.lives_left(lives)
     output.pick_letter
 
@@ -43,7 +46,6 @@ class Hangman
   end
 
   def correct_letter?(letter)
-    letter_handler = LetterHandler.new
     letter_handler.letter_in_word?(letter, word_array)
   end
 
