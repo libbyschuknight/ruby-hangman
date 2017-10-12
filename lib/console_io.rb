@@ -12,8 +12,17 @@ class ConsoleIo
     puts
   end
 
-  def play
+  def start_game_information(concealed_word)
     print("😃   LETS PLAY HANGMAN!!! 😜")
+    display_word(concealed_word)
+    pick_a_letter
+  end
+
+  def turn_information(incorrect_letters, concealed_word, lives)
+    display_incorrect_words(incorrect_letters)
+    display_word(concealed_word)
+    lives_left(lives)
+    pick_a_letter
   end
 
   def lives_left(lives)
@@ -48,9 +57,8 @@ class ConsoleIo
     print(word)
   end
 
-  def display_incorrect_words(array)
-    letters = array.reject(&:empty?).uniq.join(", ")
-    print("Incorrect guesses: #{letters}")
+  def display_incorrect_words(letters)
+    print("Incorrect guesses: #{letters.join(', ')}")
   end
 
   def win

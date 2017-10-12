@@ -12,10 +12,7 @@ class Hangman
   end
 
   def game_loop
-    console_io.play
-    console_io.display_word(concealed_word) # naming
-    console_io.pick_a_letter
-
+    console_io.start_game_information(concealed_word)
     play_turn until game_over?
     console_io.win if word_correct?
     console_io.lose if dead?
@@ -35,11 +32,7 @@ class Hangman
       console_io.incorrect_letter
     end
 
-    # player_turn method on ConsoleIo
-    console_io.display_incorrect_words(incorrect_letters)
-    console_io.display_word(concealed_word)
-    console_io.lives_left(lives)
-    console_io.pick_a_letter
+    console_io.turn_information(incorrect_letters, concealed_word, lives)
   end
 
   def check_letter(letter)

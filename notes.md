@@ -36,7 +36,7 @@
   - done ✅
 
 - As a hangman player, I must have 1 life deducted every time I make an incorrect guess of a letter that I have not already guessed
-  - is still deducting a life if letter has already been used ❌
+  - is still deducting a life if letter has already been used ✅
 
 - As a hangman player, I want the game to end when I have run out of lives
   - done ✅
