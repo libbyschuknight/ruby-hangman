@@ -4,7 +4,7 @@ require "pry"
 
 require "hangman"
 require "user_input"
-require "output"
+require "console_io"
 
 new_game = Hangman.new
 new_game.start

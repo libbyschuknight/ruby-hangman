@@ -1,5 +1,5 @@
 class Hangman
-  attr_reader :letters, :correct_letters, :output, :incorrect_letters
+  attr_reader :letters, :correct_letters, :console_io, :incorrect_letters
   attr_accessor :lives
 
   def initialize
@@ -8,12 +8,12 @@ class Hangman
     @lives = 8
     @correct_letters = []
     @incorrect_letters = []
-    @output = Output.new
+    @console_io = ConsoleIo.new
   end
 
   def start
-    output.play
-    output.display_word(partial_word_guess) # naming
+    console_io.play
+    console_io.display_word(partial_word_guess) # naming
     play_game until game_over?
   end
 
@@ -25,31 +25,44 @@ class Hangman
     # this method is more like play_turn
 
     # main control loop
-    output.lives_left(lives)
-    output.pick_a_letter
+    console_io.lives_left(lives)
+    console_io.pick_a_letter
 
-    letter = UserInput.new.letter
+    while check_letter(letter = console_io.user_input); end
 
     if correct_letter?(letter)
       correct_letters << letter
-      output.correct_letter
+      console_io.correct_letter
     else
       incorrect_letters << letter
       remove_life
-      output.incorrect_letter
+      console_io.incorrect_letter
     end
 
-    output.display_word(partial_word_guess)
-    output.display_incorrect_words(incorrect_letters)
+    console_io.display_word(partial_word_guess)
+    console_io.display_incorrect_words(incorrect_letters)
 
     # TODO: move out of here, don't need both?
-    output.win if word_correct?
-    output.lose if dead?
+    console_io.win if word_correct?
+    console_io.lose if dead?
+  end
+
+  def check_letter(letter)
+    if !letter.match(/^[a-zA-Z]+$/) #
+      console_io.be_a_letter
+      true
+    elsif letter.length != 1
+      console_io.pick_only_one_letter
+      true
+    else
+      false
+    end
   end
 
   def random_word
     ["dog", "bananas", "cat", "powershop", "word"].sample
   end
+
   def game_over?
     dead? || word_correct?
   end

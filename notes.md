@@ -10,15 +10,18 @@
   - done ✅
 
 - As a hangman player, I want to submit one letter guesses and be told whether my guess is either in the word, not in the word, or already guessed
-  - one letter guesses ❌
+  - one letter guesses ✅
 
   - not in word ✅
   - in the word ✅
   - already guessed ❌
-    -
+  
 
-- As a hangman player, I want the game to handle bad input (like numbers, symbols, and letters I've previously guessed & empty string(9)) gracefully and with an appropriate error message so that I am not punished unduly for mistakes
+- As a hangman player, I want the game to handle bad input (like numbers, symbols, and letters I've previously guessed & empty string(?)) gracefully and with an appropriate error message so that I am not punished unduly for mistakes
   - TODO ❌
+  - numbers ✅
+  - symbols✅
+
   - error class
     - handles bad input, returns nice message
     - standard error
