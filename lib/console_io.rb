@@ -13,7 +13,7 @@ class ConsoleIo
   end
 
   def play
-    print("😃 LETS PLAY HANGMAN!!! 😜")
+    print("😃   LETS PLAY HANGMAN!!! 😜")
   end
 
   def lives_left(lives)

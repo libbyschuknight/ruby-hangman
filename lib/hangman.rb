@@ -11,23 +11,20 @@ class Hangman
     @console_io = ConsoleIo.new
   end
 
-  def start
+  def game_loop
     console_io.play
-    console_io.display_word(partial_word_guess) # naming
-    play_game until game_over?
+    console_io.display_word(concealed_word) # naming
+    console_io.lives_left(lives)
+    console_io.pick_a_letter
+
+    play_turn until game_over?
+    console_io.win if word_correct?
+    console_io.lose if dead?
   end
 
   private
 
-  def play_game
-    # turn and game loop in here - pull out and make separate
-    # have turn separate to game loop
-    # this method is more like play_turn
-
-    # main control loop
-    console_io.lives_left(lives)
-    console_io.pick_a_letter
-
+  def play_turn
     while check_letter(letter = console_io.user_input); end
 
     if correct_letter?(letter)
@@ -38,17 +35,12 @@ class Hangman
       remove_life
       console_io.incorrect_letter
     end
-
-    console_io.display_word(partial_word_guess)
+    console_io.display_word(concealed_word)
     console_io.display_incorrect_words(incorrect_letters)
-
-    # TODO: move out of here, don't need both?
-    console_io.win if word_correct?
-    console_io.lose if dead?
   end
 
   def check_letter(letter)
-    if !letter.match(/^[a-zA-Z]+$/) #
+    if !letter.match(/^[a-zA-Z]+$/)
       console_io.be_a_letter
       true
     elsif letter.length != 1
@@ -83,7 +75,7 @@ class Hangman
     lives.zero?
   end
 
-  def partial_word_guess
+  def concealed_word
     letters.map do |letter|
       if correct_letters.include?(letter)
         "#{letter} "
