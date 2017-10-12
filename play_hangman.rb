@@ -8,4 +8,4 @@ require "hangman"
 require "console_io"
 
 new_game = Hangman.new
-new_game.game_loop
+new_game.play_game

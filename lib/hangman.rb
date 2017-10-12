@@ -6,12 +6,16 @@ class Hangman
     # game state
     @letters = random_word.chars
     @lives = 8
+
     @correct_letters = []
     @incorrect_letters = []
+
+    #
+
     @console_io = ConsoleIo.new
   end
 
-  def game_loop
+  def play_game
     console_io.start_game_information(concealed_word)
     play_turn until game_over?
     console_io.win if word_correct?
@@ -23,7 +27,7 @@ class Hangman
   def play_turn
     while check_letter(letter = console_io.user_input); end
 
-    if correct_letter?(letter)
+    if letters.include?(letter)
       correct_letters << letter
       console_io.correct_letter
     else
@@ -37,6 +41,7 @@ class Hangman
 
   def check_letter(letter)
     if !letter.match(/^[a-zA-Z]+$/)
+      # result object, success / error - error message
       console_io.be_a_letter
       true
     elsif letter.length != 1
@@ -54,6 +59,10 @@ class Hangman
     correct_letters.include?(letter) || incorrect_letters.include?(letter)
   end
 
+
+
+  # game behaviour
+
   def random_word
     ["dog", "bananas", "cat", "powershop", "word"].sample
   end
@@ -62,21 +71,19 @@ class Hangman
     dead? || word_correct?
   end
 
-  def correct_letter?(letter)
-    letters.include?(letter)
-  end
-
-  def remove_life
-    self.lives -= 1
+  def dead?
+    lives.zero?
   end
 
   def word_correct?
     correct_letters.uniq.sort == letters.uniq.sort
   end
 
-  def dead?
-    lives.zero?
+  def remove_life
+    self.lives -= 1
   end
+
+  ####
 
   def concealed_word
     letters.map do |letter|
