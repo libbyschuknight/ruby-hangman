@@ -2,7 +2,7 @@
   - can with `ruby play_hangman.rb` but is there a better way of doing this?
   - with a script command?
 
-- 2 player
+- 2 player??
   - player 1 enters word
   - player 2 guesses
 
@@ -11,7 +11,7 @@
 
 - As a hangman player, I want to submit one letter guesses and be told whether my guess is either in the word, not in the word, or already guessed
   - one letter guesses ❌
-    
+
   - not in word ✅
   - in the word ✅
   - already guessed ❌

@@ -18,19 +18,23 @@ class Output
   end
 
   def lives_left(lives)
-    print("You have #{lives} lives left 😱")
+    print("You have #{lives} lives left 😱.")
   end
 
-  def ask_to_pick_letter
+  def pick_a_letter
     print("Pick a letter:")
   end
 
+  def pick_only_one_letter
+    print("Only enter one letter, please pick again 😁.")
+  end
+
   def correct_letter
-    print("Cool, that letter is there")
+    print("Cool, that letter is there.")
   end
 
   def incorrect_letter
-    print("That letter is not in the word")
+    print("Nope, that letter is not there.")
   end
 
   def display_word(word)
@@ -43,12 +47,12 @@ class Output
   end
 
   def win
-    print("🎊 🎊 🎊   Yay! You got it right! You win! Congrats!   🎉🎉🎉 ")
+    print("🎊 🎊 🎊   Yay! You got it right! You win! Congrats!   🎉🎉🎉.")
     print(GAME_OVER)
   end
 
   def lose
-    print("😟   Oh no! You lose!  😭 ")
+    print("😟   Oh no! You lose!  😭.")
     print(GAME_OVER)
   end
 end

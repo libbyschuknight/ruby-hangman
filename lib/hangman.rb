@@ -26,7 +26,7 @@ class Hangman
 
     # main control loop
     output.lives_left(lives)
-    output.ask_to_pick_letter
+    output.pick_a_letter
 
     letter = UserInput.new.letter
 
