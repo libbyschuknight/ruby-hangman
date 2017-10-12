@@ -14,15 +14,14 @@
 
   - not in word ✅
   - in the word ✅
-  - already guessed ❌
-  
+  - already guessed ✅
+
 
 - As a hangman player, I want the game to handle bad input (like numbers, symbols, and letters I've previously guessed & empty string(?)) gracefully and with an appropriate error message so that I am not punished unduly for mistakes
-  - TODO ❌
   - numbers ✅
   - symbols✅
 
-  - error class
+  - error class ❌
     - handles bad input, returns nice message
     - standard error
     - result object?
@@ -31,7 +30,7 @@
   - done ✅
 
 - As a hangman player, I want to see the letters I've guessed incorrectly so that I don't guess the same wrong letter again
-  - TODO ❌
+  - TODO ✅
 
 - As a hangman player, I would like to see how many lives are remaining
   - done ✅
