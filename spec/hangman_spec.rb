@@ -1,17 +1,19 @@
 RSpec.describe Hangman do
-  before do
-    # allow not working, change what happens in class
-    allow_any_instance_of(Hangman).to receive(:random_word).and_return("flux")
-  end
-
   let(:game) { Hangman.new }
 
   describe "initializing a game" do
+    xit "has a game state" do
+      game_state = instance_double("GameState")
+      allow(game_state).to receive(:new)
+      excpect(game.game_state).to eq(game_state )
+    end
+
     it "had letters" do
       expect(game.letters).to eq(["f", "l", "u", "x"])
     end
-    it "has 8 lives" do
-      expect(game.lives).to eq(8)
+
+    it "has 10 lives" do
+      expect(game.lives).to eq(10)
     end
 
     it "has correct letters" do

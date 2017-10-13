@@ -1,11 +1,12 @@
 class Hangman
-  attr_reader :letters, :correct_letters, :console_io, :incorrect_letters
+  # Game controller
+  attr_reader :letters, :correct_letters, :console_io, :incorrect_letters, :game_state
   attr_accessor :lives
 
-  def initialize
+  def initialize(game_state = GameState.new)
     # game state
-    @letters = random_word.chars
-    @lives = 8
+    @letters = game_state.letters
+    @lives = 10
     @correct_letters = []
     @incorrect_letters = []
     ###
