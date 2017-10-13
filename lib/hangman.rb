@@ -7,8 +7,8 @@ class Hangman
     # game state
     @letters = game_state.letters
     @lives = game_state.lives
-    @correct_letters = []
-    @incorrect_letters = []
+    @correct_letters = game_state.correct_letters
+    @incorrect_letters = game_state.incorrect_letters
     ###
     @console_io = ConsoleIo.new
   end

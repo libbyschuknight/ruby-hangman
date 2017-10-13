@@ -1,21 +1,30 @@
 RSpec.describe Hangman do
-  let(:game) { Hangman.new }
+  let(:game_state) do
+    instance_double(
+      "GameState",
+      letters: ["f", "l", "u", "x"],
+      lives: 5,
+      correct_letters: [],
+      incorrect_letters: []
+    )
+  end
+
+  let(:game) { Hangman.new(game_state) }
 
   describe "initializing a game" do
+
+    # do I want to test that hangman has a GameState object?
+    # if yes, then would need to make it a instance variable
     xit "has a game state" do
-      game_state = instance_double("GameState")
-      allow(game_state).to receive(:new)
-      excpect(game.game_state).to eq(game_state )
+      expect(game.game_state).to eq(game_state)
     end
 
     it "had letters" do
-      game_state = instance_double("GameState", letters: ["f", "l", "u", "x"], lives: 0)
-      game = Hangman.new(game_state)
       expect(game.letters).to eq(["f", "l", "u", "x"])
     end
 
     it "has 10 lives" do
-      expect(game.lives).to eq(10)
+      expect(game.lives).to eq(5)
     end
 
     it "has correct letters" do

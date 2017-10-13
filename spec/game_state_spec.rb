@@ -10,5 +10,13 @@ RSpec.describe GameState do
     it "has ten lives" do
       expect(game_state.lives).to eq(10)
     end
+
+    it "has correct letters" do
+      expect(game_state.correct_letters).to eq([])
+    end
+
+    it "has incorrect letters" do
+      expect(game_state.incorrect_letters).to eq([])
+    end
   end
 end
