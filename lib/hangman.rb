@@ -6,7 +6,7 @@ class Hangman
   def initialize(game_state = GameState.new)
     # game state
     @letters = game_state.letters
-    @lives = 10
+    @lives = game_state.lives
     @correct_letters = []
     @incorrect_letters = []
     ###
