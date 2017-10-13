@@ -14,9 +14,9 @@ class Hangman
 
   def play_game
     console_io.start_game_information(concealed_word)
-    play_turn until game_over?
+    play_turn until GameBehaviour.game_over?(lives, correct_letters, letters)
     console_io.win if GameBehaviour.word_correct?(correct_letters, letters)
-    console_io.lose if dead?
+    console_io.lose if GameBehaviour.dead?(lives)
   end
 
   private
@@ -36,6 +36,8 @@ class Hangman
     console_io.turn_information(incorrect_letters, concealed_word, lives)
   end
 
+  # validation
+
   def check_letter(letter)
     if !letter.match(/^[a-zA-Z]+$/)
       # result object, success / error - error message
@@ -54,17 +56,6 @@ class Hangman
 
   def already_guessed?(letter)
     correct_letters.include?(letter) || incorrect_letters.include?(letter)
-  end
-
-
-  # game behaviour
-
-  def game_over?
-    dead? || GameBehaviour.word_correct?(correct_letters, letters)
-  end
-
-  def dead?
-    lives.zero?
   end
 
   ####
