@@ -9,6 +9,8 @@ RSpec.describe Hangman do
     end
 
     it "had letters" do
+      game_state = instance_double("GameState", letters: ["f", "l", "u", "x"], lives: 0)
+      game = Hangman.new(game_state)
       expect(game.letters).to eq(["f", "l", "u", "x"])
     end
 
