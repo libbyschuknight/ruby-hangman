@@ -4,19 +4,18 @@ class Hangman
   attr_accessor :lives
 
   def initialize(game_state = GameState.new)
-    # game state
     @letters = game_state.letters
     @lives = game_state.lives
     @correct_letters = game_state.correct_letters
     @incorrect_letters = game_state.incorrect_letters
-    ###
+
     @console_io = ConsoleIo.new
   end
 
   def play_game
     console_io.start_game_information(concealed_word)
     play_turn until game_over?
-    console_io.win if word_correct?
+    console_io.win if GameBehaviour.word_correct?(correct_letters, letters)
     console_io.lose if dead?
   end
 
@@ -30,7 +29,7 @@ class Hangman
       console_io.correct_letter
     else
       incorrect_letters << letter
-      remove_life
+      self.lives = GameBehaviour.remove_life(lives)
       console_io.incorrect_letter
     end
 
@@ -60,24 +59,12 @@ class Hangman
 
   # game behaviour
 
-  def random_word
-    ["dog", "bananas", "cat", "powershop", "word"].sample
-  end
-
   def game_over?
-    dead? || word_correct?
+    dead? || GameBehaviour.word_correct?(correct_letters, letters)
   end
 
   def dead?
     lives.zero?
-  end
-
-  def word_correct?
-    correct_letters.uniq.sort == letters.uniq.sort
-  end
-
-  def remove_life
-    self.lives -= 1
   end
 
   ####

@@ -22,6 +22,7 @@ class ConsoleIo
     display_incorrect_words(incorrect_letters)
     display_word(concealed_word)
     lives_left(lives)
+    print("____________________________")
     pick_a_letter
   end
 
