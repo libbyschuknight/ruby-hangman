@@ -1,57 +1,39 @@
 RSpec.describe Hangman do
   before do
-    allow(STDIN).to receive(:gets).and_return("f\n")
+    # allow not working, change what happens in class
+    allow_any_instance_of(Hangman).to receive(:random_word).and_return("flux")
   end
 
-  let(:game) { Hangman.new("word") }
+  let(:game) { Hangman.new }
 
-  describe "game is over" do
-    context "when player is dead" do
-      it "returns true" do
-        allow(game).to receive(:dead?).and_return(true)
-        expect(game.game_over?).to eq(true)
+  describe "initializing a game" do
+    it "had letters" do
+      expect(game.letters).to eq(["f", "l", "u", "x"])
+    end
+    it "has 8 lives" do
+      expect(game.lives).to eq(8)
+    end
+
+    it "has correct letters" do
+      expect(game.correct_letters).to eq([])
+    end
+
+    it "has incorrect letters" do
+      expect(game.incorrect_letters).to eq([])
+    end
+
+    it "has a console input output object" do
+      expect(game.console_io).to be_an_instance_of(ConsoleIo)
+    end
+  end
+
+  # not sure if worth trying to test, as going to move logic out of hangman class
+  xdescribe "play a game of hangman" do
+    context "when player dies" do
+      it "the game ends" do
+
+        expect(game.play_game)
       end
     end
-
-    context "when player gets word correct" do
-      it "returns true" do
-        allow(game).to receive(:word_correct?).and_return(true)
-        expect(game.game_over?).to eq(true)
-      end
-    end
   end
-
-  describe "check to see if letter is correct" do
-    it "is correct" do
-      result = game.correct_letter?("r")
-      expect(result).to eq(true)
-    end
-
-    it "is not correct" do
-      result = game.correct_letter?("f")
-      expect(result).to eq(false)
-    end
-  end
-
-  describe "collecting letters" do
-    it "returns collection of letters" do
-      collection = []
-      result = game.collect_letters("r", collection)
-      expect(result).to eq(["r"])
-    end
-  end
-
-  # describe "correct letters" do
-  #   it "collects letters" do
-  #     result = game.correct_letters("r")
-  #     expect(result).to eq(["r"])
-  #   end
-  # end
-  #
-  # describe "incorrect letters letters" do
-  #   it "collects letters" do
-  #     result = game.incorrect_letters("r")
-  #     expect(result).to eq(["r"])
-  #   end
-  # end
 end

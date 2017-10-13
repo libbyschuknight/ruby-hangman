@@ -6,12 +6,9 @@ class Hangman
     # game state
     @letters = random_word.chars
     @lives = 8
-
     @correct_letters = []
     @incorrect_letters = []
-
-    #
-
+    ###
     @console_io = ConsoleIo.new
   end
 
@@ -58,7 +55,6 @@ class Hangman
   def already_guessed?(letter)
     correct_letters.include?(letter) || incorrect_letters.include?(letter)
   end
-
 
 
   # game behaviour
