@@ -1,3 +1,5 @@
+require "spec_helper"
+
 RSpec.describe GameBehaviour do
   context "when checking the word" do
     it "is correct" do

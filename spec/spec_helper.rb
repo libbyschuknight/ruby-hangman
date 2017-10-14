@@ -1,5 +1,8 @@
 require "pry"
 
+$LOAD_PATH.unshift("#{File.dirname(__FILE__)}/lib")
+
+
 require_relative "../lib/hangman"
 require_relative "../lib/console_io"
 require_relative "../lib/game_state"

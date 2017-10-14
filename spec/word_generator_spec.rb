@@ -1,3 +1,5 @@
+require "spec_helper"
+
 RSpec.describe WordGenerator do
   describe "random word" do
     it "returns a word" do

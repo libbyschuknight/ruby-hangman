@@ -1,3 +1,5 @@
+require "spec_helper"
+
 RSpec.describe Hangman do
   let(:game_state) do
     instance_double(

@@ -1,3 +1,5 @@
+require "spec_helper"
+
 RSpec.describe GameState do
   describe "initializing a game state" do
     let(:game_state) { GameState.new }

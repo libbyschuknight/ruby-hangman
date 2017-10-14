@@ -37,7 +37,6 @@ class Hangman
   end
 
   # validation
-
   def check_letter(letter)
     if !letter.match(/^[a-zA-Z]+$/)
       # result object, success / error - error message
