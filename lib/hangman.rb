@@ -9,7 +9,7 @@ class Hangman
     @correct_letters = game_state.correct_letters
     @incorrect_letters = game_state.incorrect_letters
 
-    @console_io = ConsoleIo.new
+    @console_io = ConsoleIo.new # refactor - inject as dependency
   end
 
   def play_game
@@ -38,7 +38,7 @@ class Hangman
 
   # validation
   def check_letter(letter)
-    validator = LetterValidator.new(letter)
+    validator = LetterValidator.new(letter) # inject at top, change to not pass in letter at initialize ??
     if !validator.alpha_char?
       # result object, success / error - error message
       console_io.be_a_letter
