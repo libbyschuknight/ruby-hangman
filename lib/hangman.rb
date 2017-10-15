@@ -38,7 +38,8 @@ class Hangman
 
   # validation
   def check_letter(letter)
-    if !letter.match(/^[a-zA-Z]+$/)
+    validator = LetterValidator.new(letter)
+    if !validator.alpha_char?
       # result object, success / error - error message
       console_io.be_a_letter
       true
