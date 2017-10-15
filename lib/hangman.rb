@@ -1,13 +1,14 @@
 class Hangman
   # Game controller
-  attr_reader :letters, :correct_letters, :console_io, :incorrect_letters, :game_state
+  attr_reader :letters, :correct_letters, :console_io, :incorrect_letters, :game_state, :validator
   attr_accessor :lives
 
-  def initialize(game_state = GameState.new)
+  def initialize(game_state:, validator:)
     @letters = game_state.letters
     @lives = game_state.lives
     @correct_letters = game_state.correct_letters
     @incorrect_letters = game_state.incorrect_letters
+    @validator = validator
 
     @console_io = ConsoleIo.new # refactor - inject as dependency
   end
@@ -38,20 +39,11 @@ class Hangman
 
   # validation
   def check_letter(letter)
-    validator = LetterValidator.new(letter) # inject at top, change to not pass in letter at initialize ??
-    if !validator.alpha_character?
-      # result object, success / error - error message
-      console_io.be_a_letter
-      true
-    elsif !validator.one_character?
-      console_io.pick_only_one_letter
-      true
-    elsif validator.already_tried?(correct_letters, incorrect_letters)
-      console_io.have_already_tried
-      true
-    else
-      false
-    end
+    validator.validate(
+      letter: letter,
+      correct_letters: correct_letters,
+      incorrect_letters: incorrect_letters
+    )
   end
 
   ####

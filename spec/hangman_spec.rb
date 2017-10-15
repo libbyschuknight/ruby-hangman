@@ -11,7 +11,7 @@ RSpec.describe Hangman do
     )
   end
 
-  let(:game) { Hangman.new(game_state) }
+  let(:game) { Hangman.new(game_state: game_state, validator: nil) }
 
   describe "initializing a game" do
 
@@ -21,7 +21,8 @@ RSpec.describe Hangman do
       expect(game.game_state).to eq(game_state)
     end
 
-    it "had letters" do
+    # doubling up testing game state here???
+    it "has letters" do
       expect(game.letters).to eq(["f", "l", "u", "x"])
     end
 
@@ -39,16 +40,6 @@ RSpec.describe Hangman do
 
     it "has a console input output object" do
       expect(game.console_io).to be_an_instance_of(ConsoleIo)
-    end
-  end
-
-  # not sure if worth trying to test, as going to move logic out of hangman class
-  xdescribe "play a game of hangman" do
-    context "when player dies" do
-      it "the game ends" do
-
-        expect(game.play_game)
-      end
     end
   end
 end

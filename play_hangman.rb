@@ -11,5 +11,6 @@ require "game_behaviour"
 require "word_generator"
 require "letter_validator"
 
-new_game = Hangman.new
+validator = LetterValidator.new(output: ConsoleIo.new)
+new_game = Hangman.new(game_state: GameState.new, validator: validator)
 new_game.play_game
