@@ -1,4 +1,4 @@
-class Hangman
+class GameController
   # Game controller
   attr_reader :letters, :correct_letters, :console_io, :incorrect_letters, :game_state, :validator
   attr_accessor :lives
@@ -48,6 +48,7 @@ class Hangman
 
   ####
 
+  # TODO: do something so that strings are not in here, return letter or nil
   def concealed_word
     letters.map do |letter|
       if correct_letters.include?(letter)

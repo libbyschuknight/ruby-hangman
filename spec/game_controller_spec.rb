@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe Hangman do
+RSpec.describe GameController do
   let(:game_state) do
     instance_double(
       "GameState",
@@ -11,7 +11,7 @@ RSpec.describe Hangman do
     )
   end
 
-  let(:game) { Hangman.new(game_state: game_state, validator: nil) }
+  let(:game) { GameController.new(game_state: game_state, validator: nil) }
 
   describe "initializing a game" do
 
