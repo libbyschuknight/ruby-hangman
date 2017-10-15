@@ -39,23 +39,19 @@ class Hangman
   # validation
   def check_letter(letter)
     validator = LetterValidator.new(letter) # inject at top, change to not pass in letter at initialize ??
-    if !validator.alpha_char?
+    if !validator.alpha_character?
       # result object, success / error - error message
       console_io.be_a_letter
       true
-    elsif letter.length != 1
+    elsif !validator.one_character?
       console_io.pick_only_one_letter
       true
-    elsif already_guessed?(letter)
-      console_io.have_already_guessed
+    elsif validator.already_tried?(correct_letters, incorrect_letters)
+      console_io.have_already_tried
       true
     else
       false
     end
-  end
-
-  def already_guessed?(letter)
-    correct_letters.include?(letter) || incorrect_letters.include?(letter)
   end
 
   ####
