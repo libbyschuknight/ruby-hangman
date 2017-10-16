@@ -11,10 +11,11 @@ require "game_service"
 require "word_generator"
 require "letter_validator"
 
+console_io = ConsoleIo.new
 new_game = GameController.new(
   game_state: GameState.new,
   game_service: GameService,
-  validator: LetterValidator.new(output: ConsoleIo.new),
-  console_io: ConsoleIo.new,
+  validator: LetterValidator.new(output: console_io),
+  console_io: console_io,
 )
 new_game.play_game

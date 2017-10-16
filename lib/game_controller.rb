@@ -3,6 +3,7 @@ class GameController
   attr_accessor :lives
 
   def initialize(game_state:, game_service:, validator:, console_io:)
+    # NOTE: mentor feedback on this vs using game_state.letters thru file
     @letters = game_state.letters
     @lives = game_state.lives
     @correct_letters = game_state.correct_letters
@@ -17,8 +18,14 @@ class GameController
     play_turn until game_service.game_over?(lives, correct_letters, letters)
 
     # TODO: do something with win or lose? need to have both?
-    console_io.win if game_service.word_correct?(correct_letters, letters)
-    console_io.lose if game_service.dead?(lives)
+
+    if game_service.word_correct?(correct_letters, letters)
+      console_io.win
+    else
+      console_io.lose
+    end
+    # if game_service.dead?(lives)
+    # if game_service.word_correct?(correct_letters, letters)
   end
 
   private
@@ -38,6 +45,7 @@ class GameController
     end
 
     console_io.turn_information(incorrect_letters, concealed_word, lives)
+    console_io.lives_and_letter(lives) unless game_service.game_over?(lives, correct_letters, letters)
   end
 
   def validate_letter(letter)
@@ -48,9 +56,8 @@ class GameController
     )
   end
 
-
   # TODO: do something so that strings are not in here, return letter or nil
-  # game behaviour?
+  # game service?
   # game state?
   def concealed_word
     letters.map do |letter|
@@ -60,5 +67,6 @@ class GameController
         "_ "
       end
     end.join
+    # TODO: join()
   end
 end

@@ -6,11 +6,17 @@ class LetterValidator
   end
 
   # TODO: refactor, result object?
+
+  # 2 concerns, validtin letter and telling outpu class a message
+  # return a symbol
+  # add to consple oi display right error message,
+
   def validate(letter:, correct_letters:, incorrect_letters:)
     if !alpha_character?(letter)
       # result object, success / error - error message
       output.be_a_letter
       true
+      # return symbol here
     elsif !one_character?(letter)
       output.pick_only_one_letter
       true

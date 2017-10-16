@@ -4,7 +4,7 @@ class ConsoleIo
   GAME_OVER = ">>>> GAME OVER <<<<".freeze
 
   def user_input
-    gets.chomp
+    gets.chomp.downcase
   end
 
   def print(message)
@@ -23,6 +23,9 @@ class ConsoleIo
     print("____________________________")
     display_incorrect_words(incorrect_letters)
     display_word(concealed_word)
+  end
+
+  def lives_and_letter(lives)
     lives_left(lives)
     pick_a_letter
   end
