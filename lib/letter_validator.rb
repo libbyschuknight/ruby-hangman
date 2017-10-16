@@ -5,6 +5,7 @@ class LetterValidator
     @output = output
   end
 
+  # TODO: refactor, result object?
   def validate(letter:, correct_letters:, incorrect_letters:)
     if !alpha_character?(letter)
       # result object, success / error - error message

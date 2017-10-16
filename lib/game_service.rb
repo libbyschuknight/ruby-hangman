@@ -1,9 +1,7 @@
 module GameService
-  # TODO: ?? make into class so can have an instance of the class
+  # TODO: ?? make into class so can have an instance of the class?? why though?
   # def initialize
   # end
-
-  # rename GameServiceService
 
   def self.game_over?(lives, correct_letters, letters)
     dead?(lives) || word_correct?(correct_letters, letters)

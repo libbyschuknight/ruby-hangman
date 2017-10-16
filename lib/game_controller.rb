@@ -1,5 +1,4 @@
 class GameController
-  # Game controller
   attr_reader :letters, :correct_letters, :console_io, :incorrect_letters, :game_state, :validator, :game_service
   attr_accessor :lives
 
@@ -16,6 +15,8 @@ class GameController
   def play_game
     console_io.start_game_information(concealed_word, lives)
     play_turn until game_service.game_over?(lives, correct_letters, letters)
+
+    # TODO: do something with win or lose? need to have both?
     console_io.win if game_service.word_correct?(correct_letters, letters)
     console_io.lose if game_service.dead?(lives)
   end
@@ -23,8 +24,10 @@ class GameController
   private
 
   def play_turn
+    # TODO: do this loop in a better why?
     while validate_letter(letter = console_io.user_input); end
 
+    # TODO: refactor
     if letters.include?(letter)
       correct_letters << letter
       console_io.correct_letter
@@ -48,6 +51,7 @@ class GameController
 
   # TODO: do something so that strings are not in here, return letter or nil
   # game behaviour?
+  # game state?
   def concealed_word
     letters.map do |letter|
       if correct_letters.include?(letter)
