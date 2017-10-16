@@ -12,8 +12,9 @@ class ConsoleIo
     puts
   end
 
-  def start_game_information(concealed_word)
+  def start_game_information(concealed_word, lives)
     print("😃   LETS PLAY HANGMAN!!! 😜")
+    print("You have #{lives} lives. ")
     display_word(concealed_word)
     pick_a_letter
   end

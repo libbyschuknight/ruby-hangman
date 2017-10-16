@@ -11,7 +11,14 @@ RSpec.describe GameController do
     )
   end
 
-  let(:game) { GameController.new(game_state: game_state, validator: nil) }
+  let(:game) do
+    GameController.new(
+      game_state: game_state,
+      game_service: nil,
+      validator: nil,
+      console_io: ConsoleIo.new
+    )
+  end
 
   describe "initializing a game" do
 
