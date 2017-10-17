@@ -16,16 +16,7 @@ class GameController
   def play_game
     console_io.start_game_information(concealed_word, lives)
     play_turn until game_service.game_over?(lives, correct_letters, letters)
-
-    # TODO: do something with win or lose? need to have both?
-
-    if game_service.word_correct?(correct_letters, letters)
-      console_io.win
-    else
-      console_io.lose
-    end
-    # if game_service.dead?(lives)
-    # if game_service.word_correct?(correct_letters, letters)
+    game_service.dead?(lives) ? console_io.lose : console_io.win
   end
 
   private
