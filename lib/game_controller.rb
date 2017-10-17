@@ -47,9 +47,6 @@ class GameController
     )
   end
 
-  # TODO: do something so that strings are not in here, return letter or nil
-  # game service?
-  # game state?
   def concealed_word
     letters.map { |letter| correct_letters.include?(letter) ? letter : nil }
   end
