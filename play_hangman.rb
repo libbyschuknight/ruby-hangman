@@ -4,17 +4,17 @@ $LOAD_PATH.unshift("#{File.dirname(__FILE__)}/lib")
 
 require "pry"
 
-require "game_controller"
+require "controller"
 require "console_io"
-require "game_state"
+require "state"
 require "game_service"
 require "word_generator"
 require "letter_validator"
 
 console_io = ConsoleIo.new
 
-new_game = GameController.new(
-  game_state: GameState.new,
+new_game = Controller.new(
+  state: State.new,
   game_service: GameService,
   validator: LetterValidator.new(output: console_io),
   console_io: console_io,

@@ -1,24 +1,24 @@
 require "spec_helper"
 
-RSpec.describe GameState do
+RSpec.describe State do
   describe "initializing a game state" do
-    let(:game_state) { GameState.new }
+    let(:state) { State.new }
 
     it "has letters" do
       allow(WordGenerator).to receive(:random_word).and_return("flux")
-      expect(game_state.letters).to eq(["f", "l", "u", "x"])
+      expect(state.letters).to eq(["f", "l", "u", "x"])
     end
 
     it "has ten lives" do
-      expect(game_state.lives).to eq(10)
+      expect(state.lives).to eq(10)
     end
 
     it "has correct letters" do
-      expect(game_state.correct_letters).to eq([])
+      expect(state.correct_letters).to eq([])
     end
 
     it "has incorrect letters" do
-      expect(game_state.incorrect_letters).to eq([])
+      expect(state.incorrect_letters).to eq([])
     end
   end
 end

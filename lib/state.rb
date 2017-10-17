@@ -1,4 +1,4 @@
-class GameState
+class State
   attr_reader :letters, :correct_letters, :incorrect_letters
   attr_accessor :lives
 

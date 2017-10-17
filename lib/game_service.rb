@@ -25,4 +25,4 @@ end
 # game tranistiaons / checks
 # move into game state, would be more like a model in rails
 
-# get rid of ivars in controller and use game_state.
+# get rid of ivars in controller and use state.

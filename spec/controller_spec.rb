@@ -1,9 +1,9 @@
 require "spec_helper"
 
-RSpec.describe GameController do
-  let(:game_state) do
+RSpec.describe Controller do
+  let(:state) do
     instance_double(
-      "GameState",
+      "State",
       letters: ["f", "l", "u", "x"],
       lives: 5,
       correct_letters: [],
@@ -16,8 +16,8 @@ RSpec.describe GameController do
   let(:console_io) { instance_double("ConsoleIo") }
 
   let(:game) do
-    GameController.new(
-      game_state: game_state,
+    Controller.new(
+      state: state,
       game_service: nil,
       validator: validator,
       console_io: console_io
@@ -26,7 +26,7 @@ RSpec.describe GameController do
 
   describe "initializing a game" do
     it "has a game state" do
-      expect(game.game_state).to eq(game_state)
+      expect(game.state).to eq(state)
     end
 
     it "has a letter validator object" do
