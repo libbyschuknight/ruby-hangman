@@ -15,14 +15,14 @@ class ConsoleIo
   def start_game_information(concealed_word, lives)
     print("😃   LETS PLAY HANGMAN!!! 😜")
     print("You have #{lives} lives. ")
-    display_word(concealed_word)
+    display_concealed_word(concealed_word)
     pick_a_letter
   end
 
   def turn_information(incorrect_letters, concealed_word, lives)
     print("____________________________")
     display_incorrect_words(incorrect_letters)
-    display_word(concealed_word)
+    display_concealed_word(concealed_word)
   end
 
   def lives_and_letter(lives)
@@ -58,8 +58,9 @@ class ConsoleIo
     print("You have already guessed that letter, please pick again 😁")
   end
 
-  def display_word(word)
-    print(word)
+  def display_concealed_word(word)
+    word.map! { |element| element.nil? ? "_" : element }
+    print(word.join(" "))
   end
 
   def display_incorrect_words(letters)

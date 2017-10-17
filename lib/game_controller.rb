@@ -51,13 +51,6 @@ class GameController
   # game service?
   # game state?
   def concealed_word
-    letters.map do |letter|
-      if correct_letters.include?(letter)
-        "#{letter} "
-      else
-        "_ "
-      end
-    end.join
-    # TODO: join()
+    letters.map { |letter| correct_letters.include?(letter) ? letter : nil }
   end
 end
