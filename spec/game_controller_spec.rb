@@ -11,42 +11,30 @@ RSpec.describe GameController do
     )
   end
 
+  let(:validator) { instance_double("LetterValidator") }
+
+  let(:console_io) { instance_double("ConsoleIo") }
+
   let(:game) do
     GameController.new(
       game_state: game_state,
       game_service: nil,
-      validator: nil,
-      console_io: ConsoleIo.new
+      validator: validator,
+      console_io: console_io
     )
   end
 
   describe "initializing a game" do
-
-    # do I want to test that hangman has a GameState object?
-    # if yes, then would need to make it a instance variable
-    xit "has a game state" do
+    it "has a game state" do
       expect(game.game_state).to eq(game_state)
     end
 
-    # doubling up testing game state here???
-    it "has letters" do
-      expect(game.letters).to eq(["f", "l", "u", "x"])
+    it "has a letter validator object" do
+      expect(game.validator).to eq(validator)
     end
 
-    it "has 10 lives" do
-      expect(game.lives).to eq(5)
-    end
-
-    it "has correct letters" do
-      expect(game.correct_letters).to eq([])
-    end
-
-    it "has incorrect letters" do
-      expect(game.incorrect_letters).to eq([])
-    end
-
-    it "has a console input output object" do
-      expect(game.console_io).to be_an_instance_of(ConsoleIo)
+    it "has a console io object" do
+      expect(game.console_io).to eq(console_io)
     end
   end
 end

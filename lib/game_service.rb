@@ -3,16 +3,14 @@ module GameService
   # def initialize
   # end
 
-  # TODO: differnce between moudel  and class
+  # TODO: differnce between module  and class
 
   def self.game_over?(lives, correct_letters, letters)
     dead?(lives) || word_correct?(correct_letters, letters)
   end
 
   def self.word_correct?(correct_letters, letters)
-    # TODO: don't ned uniq??
-    # letters - correct_letters.empty?
-    correct_letters.uniq.sort == letters.uniq.sort
+    correct_letters.sort == letters.sort
   end
 
   def self.dead?(lives)
@@ -23,3 +21,8 @@ module GameService
     lives - 1
   end
 end
+
+# game tranistiaons / checks
+# move into game state, would be more like a model in rails
+
+# get rid of ivars in controller and use game_state.

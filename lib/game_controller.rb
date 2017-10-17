@@ -1,22 +1,25 @@
 class GameController
   attr_reader :letters, :correct_letters, :console_io, :incorrect_letters, :game_state, :validator, :game_service
-  attr_accessor :lives
 
   def initialize(game_state:, game_service:, validator:, console_io:)
-    # NOTE: mentor feedback on this vs using game_state.letters thru file
+    @game_state = game_state
+
     @letters = game_state.letters
-    @lives = game_state.lives
     @correct_letters = game_state.correct_letters
     @incorrect_letters = game_state.incorrect_letters
+
+    # removing
     @game_service = game_service
+
+
     @validator = validator
     @console_io = console_io
   end
 
   def play_game
-    console_io.start_game_information(concealed_word, lives)
-    play_turn until game_service.game_over?(lives, correct_letters, letters)
-    game_service.dead?(lives) ? console_io.lose : console_io.win
+    console_io.start_game_information(concealed_word, game_state.lives)
+    play_turn until game_service.game_over?(game_state.lives, correct_letters, letters)
+    game_service.dead?(game_state.lives) ? console_io.lose : console_io.win
   end
 
   private
@@ -31,12 +34,12 @@ class GameController
       console_io.correct_letter
     else
       incorrect_letters << letter
-      self.lives = game_service.remove_life(lives)
+      game_state.remove_life
       console_io.incorrect_letter
     end
 
-    console_io.turn_information(incorrect_letters, concealed_word, lives)
-    console_io.lives_and_letter(lives) unless game_service.game_over?(lives, correct_letters, letters)
+    console_io.turn_information(incorrect_letters, concealed_word, game_state.lives)
+    console_io.lives_and_letter(game_state.lives) unless game_service.game_over?(game_state.lives, correct_letters, letters)
   end
 
   def validate_letter(letter)
