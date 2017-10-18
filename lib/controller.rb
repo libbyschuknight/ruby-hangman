@@ -1,11 +1,11 @@
 class Controller
-  attr_reader :state, :correct_letters, :console_io, :incorrect_letters, :validator, :game_service
+  attr_reader :state, :console_io, :validator, :game_service
 
   def initialize(state:, game_service:, validator:, console_io:)
     @state = state
 
     # @correct_letters = state.correct_letters
-    @incorrect_letters = state.incorrect_letters
+    # @incorrect_letters = state.incorrect_letters
 
     # removing
     @game_service = game_service
@@ -32,12 +32,12 @@ class Controller
       state.correct_letters << letter
       console_io.correct_letter
     else
-      incorrect_letters << letter
+      state.incorrect_letters << letter
       state.remove_life
       console_io.incorrect_letter
     end
 
-    console_io.turn_information(incorrect_letters, concealed_word, state.lives)
+    console_io.turn_information(state.incorrect_letters, concealed_word, state.lives)
     console_io.lives_and_letter(state.lives) unless game_service.game_over?(state.lives, state.correct_letters, state.letters)
   end
 
@@ -45,7 +45,7 @@ class Controller
     validator.validate(
       letter: letter,
       correct_letters: state.correct_letters,
-      incorrect_letters: incorrect_letters
+      incorrect_letters: state.incorrect_letters
     )
   end
 
