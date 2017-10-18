@@ -10,7 +10,7 @@ module GameService
   end
 
   def self.word_correct?(correct_letters, letters)
-    correct_letters.sort == letters.sort
+    correct_letters.uniq.sort == letters.uniq.sort
   end
 
   def self.dead?(lives)

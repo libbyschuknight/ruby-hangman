@@ -4,7 +4,7 @@ class Controller
   def initialize(state:, game_service:, validator:, console_io:)
     @state = state
 
-    @correct_letters = state.correct_letters
+    # @correct_letters = state.correct_letters
     @incorrect_letters = state.incorrect_letters
 
     # removing
@@ -17,7 +17,7 @@ class Controller
 
   def play_game
     console_io.start_game_information(concealed_word, state.lives)
-    play_turn until game_service.game_over?(state.lives, correct_letters, state.letters)
+    play_turn until game_service.game_over?(state.lives, state.correct_letters, state.letters)
     game_service.dead?(state.lives) ? console_io.lose : console_io.win
   end
 
@@ -29,7 +29,7 @@ class Controller
 
     # TODO: refactor
     if state.letters.include?(letter)
-      correct_letters << letter
+      state.correct_letters << letter
       console_io.correct_letter
     else
       incorrect_letters << letter
@@ -38,18 +38,18 @@ class Controller
     end
 
     console_io.turn_information(incorrect_letters, concealed_word, state.lives)
-    console_io.lives_and_letter(state.lives) unless game_service.game_over?(state.lives, correct_letters, state.letters)
+    console_io.lives_and_letter(state.lives) unless game_service.game_over?(state.lives, state.correct_letters, state.letters)
   end
 
   def validate_letter(letter)
     validator.validate(
       letter: letter,
-      correct_letters: correct_letters,
+      correct_letters: state.correct_letters,
       incorrect_letters: incorrect_letters
     )
   end
 
   def concealed_word
-    state.letters.map { |letter| correct_letters.include?(letter) ? letter : nil }
+    state.letters.map { |letter| state.correct_letters.include?(letter) ? letter : nil }
   end
 end
