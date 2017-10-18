@@ -15,14 +15,9 @@ RSpec.describe Controller do
 
   let(:console_io) { instance_double("ConsoleIo") }
 
-  let(:game_service) do
-    class_double("GameService", dead?: true)
-  end
-
   let(:game) do
     Controller.new(
       state: state,
-      game_service: game_service,
       validator: validator,
       console_io: console_io
     )

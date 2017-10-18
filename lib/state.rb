@@ -12,4 +12,16 @@ class State
   def remove_life
     self.lives -= 1
   end
+
+  def dead?
+    lives.zero?
+  end
+
+  def word_correct?
+    (letters - correct_letters).empty?
+  end
+
+  def game_over?
+    dead? || word_correct?
+  end
 end

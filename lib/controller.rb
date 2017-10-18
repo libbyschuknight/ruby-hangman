@@ -1,24 +1,16 @@
 class Controller
-  attr_reader :state, :console_io, :validator, :game_service
+  attr_reader :state, :console_io, :validator
 
-  def initialize(state:, game_service:, validator:, console_io:)
+  def initialize(state:, validator:, console_io:)
     @state = state
-
-    # @correct_letters = state.correct_letters
-    # @incorrect_letters = state.incorrect_letters
-
-    # removing
-    @game_service = game_service
-
-
     @validator = validator
     @console_io = console_io
   end
 
   def play_game
     console_io.start_game_information(concealed_word, state.lives)
-    play_turn until game_service.game_over?(state.lives, state.correct_letters, state.letters)
-    game_service.dead?(state.lives) ? console_io.lose : console_io.win
+    play_turn until state.game_over?
+    state.dead? ? console_io.lose : console_io.win
   end
 
   private
@@ -38,7 +30,7 @@ class Controller
     end
 
     console_io.turn_information(state.incorrect_letters, concealed_word, state.lives)
-    console_io.lives_and_letter(state.lives) unless game_service.game_over?(state.lives, state.correct_letters, state.letters)
+    console_io.lives_and_letter(state.lives) unless state.game_over?
   end
 
   def validate_letter(letter)
