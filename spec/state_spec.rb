@@ -2,10 +2,9 @@ require "spec_helper"
 
 RSpec.describe State do
   describe "initializing a game state" do
-    let(:state) { State.new }
+    let(:state) { State.new(["f", "l", "u", "x"]) }
 
     it "has letters" do
-      allow(WordGenerator).to receive(:random_word).and_return("flux")
       expect(state.letters).to eq(["f", "l", "u", "x"])
     end
 
@@ -23,7 +22,7 @@ RSpec.describe State do
   end
 
   describe "check the state of a game " do
-    let(:state) { State.new }
+    let(:state) { State.new(["f", "l", "u", "x"]) }
 
     it "player is dead" do
       state.lives = 0
@@ -36,14 +35,12 @@ RSpec.describe State do
 
     context "when checking the word" do
       it "is correct" do
-        allow(WordGenerator).to receive(:random_word).and_return("flux")
         allow(state).to receive(:correct_letters).and_return("flux".chars) # not sure about this??
         result = state.word_correct?
         expect(result).to eq(true)
       end
 
       it "is not correct" do
-        allow(WordGenerator).to receive(:random_word).and_return("flux")
         allow(state).to receive(:correct_letters).and_return(["f"]) # not sure
         result = state.word_correct?
         expect(result).to eq(false)
@@ -61,7 +58,6 @@ RSpec.describe State do
 
       context "when player guesses the word" do
         it "returns true" do
-          allow(WordGenerator).to receive(:random_word).and_return("flux")
           allow(state).to receive(:correct_letters).and_return(["f", "l", "u", "x"]) # not sure
           result = state.game_over?
           expect(result).to eq(true)
