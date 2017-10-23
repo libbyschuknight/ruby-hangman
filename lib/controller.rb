@@ -20,7 +20,11 @@ class Controller
     # while true keeping getting input
     # but want to have while not valid keep getting user input
     # is letter valid - valid_letter?
-    while validate_letter(letter = console_io.user_input); end
+
+    # until letter is valid (true) keep asking for a letter
+    until valid_letter?(letter = console_io.user_input); end
+
+    # until validate_letter(letter = console_io.user_input); end
 
     # NOTE: not sure about moving into methods and names of methods
     if state.letters.include?(letter)
@@ -35,13 +39,29 @@ class Controller
     turn_information
   end
 
-  def validate_letter(letter)
+  def valid_letter?(letter)
     validator.validate(
       letter: letter,
       correct_letters: state.correct_letters,
       incorrect_letters: state.incorrect_letters
     )
+
+    # result object, return succes or not / true or false
+
+    # if valid letter
+    #   return true
+    # if not valid
+    #   retrun false
+
   end
+
+  # def validate_letter(letter)
+  #   validator.validate(
+  #     letter: letter,
+  #     correct_letters: state.correct_letters,
+  #     incorrect_letters: state.incorrect_letters
+  #   )
+  # end
 
   def concealed_word
     state.letters.map { |letter| state.correct_letters.include?(letter) ? letter : nil }
