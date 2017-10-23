@@ -13,7 +13,7 @@ require "letter_validator"
 console_io = ConsoleIo.new
 
 new_game = Controller.new(
-  state: State.new(WordGenerator.random_word.chars),
+  state: State.new(letters: WordGenerator.random_word.chars),
   validator: LetterValidator.new(output: console_io),
   console_io: console_io,
 )

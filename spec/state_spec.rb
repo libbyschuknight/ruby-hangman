@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.describe State do
   describe "initializing a game state" do
-    let(:state) { State.new(["f", "l", "u", "x"]) }
+    let(:state) { State.new(letters: ["f", "l", "u", "x"]) }
 
     it "has letters" do
       expect(state.letters).to eq(["f", "l", "u", "x"])
@@ -22,7 +22,7 @@ RSpec.describe State do
   end
 
   describe "check the state of a game " do
-    let(:state) { State.new(["f", "l", "u", "x"]) }
+    let(:state) { State.new(letters: ["f", "l", "u", "x"]) }
 
     it "player is dead" do
       state.lives = 0
