@@ -21,7 +21,7 @@ class LetterValidator
       output.pick_only_one_letter
       true
     elsif already_tried?(letter, correct_letters, incorrect_letters)
-      output.have_already_tried
+      output.already_tried_letter
       true
     else
       false

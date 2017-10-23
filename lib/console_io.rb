@@ -19,7 +19,7 @@ class ConsoleIo
     pick_a_letter
   end
 
-  def turn_information(incorrect_letters, concealed_word, lives)
+  def turn_information(incorrect_letters, concealed_word)
     print("____________________________")
     display_incorrect_words(incorrect_letters)
     display_concealed_word(concealed_word)
@@ -54,7 +54,7 @@ class ConsoleIo
     print("Nope, that letter is not there.")
   end
 
-  def have_already_tried
+  def already_tried_letter
     print("You have already guessed that letter, please pick again 😁")
   end
 

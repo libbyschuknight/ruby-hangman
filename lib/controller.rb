@@ -29,7 +29,7 @@ class Controller
       console_io.incorrect_letter
     end
 
-    console_io.turn_information(state.incorrect_letters, concealed_word, state.lives)
+    console_io.turn_information(state.incorrect_letters, concealed_word)
     console_io.lives_and_letter(state.lives) unless state.game_over?
   end
 
