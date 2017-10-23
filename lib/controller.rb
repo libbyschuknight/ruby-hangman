@@ -47,6 +47,9 @@ class Controller
     )
 
     # result object, return succes or not / true or false
+    # print message here - result obejct message
+
+    # return result - true or false
 
     # if valid letter
     #   return true
