@@ -11,10 +11,10 @@ class LetterValidator
   # return a symbol
   # add to consple oi display right error message,
 
+
   def validate(letter:, correct_letters:, incorrect_letters:)
-    result = valid?(letter, correct_letters, incorrect_letters)
     error_message(letter, correct_letters, incorrect_letters)
-    result
+    valid?(letter, correct_letters, incorrect_letters)
   end
 
   private
