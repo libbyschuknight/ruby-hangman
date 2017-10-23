@@ -17,20 +17,22 @@ class Controller
 
   def play_turn
     # TODO: do this loop in a better why?
+    # while true keeping getting input
+    # but want to have while not valid keep getting user input
+    # is letter valid - valid_letter?
     while validate_letter(letter = console_io.user_input); end
 
-    # TODO: refactor
+    # NOTE: not sure about moving into methods and names of methods
     if state.letters.include?(letter)
-      state.correct_letters << letter
-      console_io.correct_letter
+      collect_and_display_letter(letter)
     else
-      state.incorrect_letters << letter
-      state.remove_life
-      console_io.incorrect_letter
+      collect_letter_take_live_display_letter(letter)
     end
 
-    console_io.turn_information(state.incorrect_letters, concealed_word)
-    console_io.lives_and_letter(state.lives) unless state.game_over?
+    # NOTE: ternary???
+    # state.letters.include?(letter) ? collect_and_display_letter(letter) : collect_letter_take_live_display_letter(letter)
+
+    turn_information
   end
 
   def validate_letter(letter)
@@ -43,5 +45,21 @@ class Controller
 
   def concealed_word
     state.letters.map { |letter| state.correct_letters.include?(letter) ? letter : nil }
+  end
+
+  def collect_and_display_letter(letter)
+    state.correct_letters << letter
+    console_io.correct_letter
+  end
+
+  def collect_letter_take_live_display_letter(letter)
+    state.incorrect_letters << letter
+    state.remove_life
+    console_io.incorrect_letter
+  end
+
+  def turn_information
+    console_io.turn_information(state.incorrect_letters, concealed_word)
+    console_io.lives_and_letter(state.lives) unless state.game_over?
   end
 end
