@@ -32,7 +32,7 @@ RSpec.describe Controller do
   describe "playing a game" do
     context "when game is lost" do
       it "returns a lose message" do
-        allow(state).to receive(:lost?).and_return(true)
+        state.lives = 0
         expect(console_io).to receive(:lose)
         game.play_game
       end
@@ -40,7 +40,11 @@ RSpec.describe Controller do
 
     context "when game is won" do
       it "returns a win message" do
-        allow(state).to receive(:word_correct?).and_return(true)
+        # allow(state).to receive(:word_correct?).and_return(true)
+
+        # not working as correct_guessed_letters is only an attr_reader
+        state.correct_guessed_letters = "flux".chars
+
         expect(console_io).to receive(:win)
         game.play_game
       end
