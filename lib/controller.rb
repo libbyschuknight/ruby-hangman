@@ -17,8 +17,8 @@ class Controller
 
   def play_turn
     console_io.lives_and_letter(state.lives)
-    letter = retrieve_user_input
-    check_letter_in_word(letter) # bad method name 😫
+    guessed_letter = retrieve_user_input
+    check_letter_in_word(guessed_letter) # bad method name 😫
     console_io.turn_information(state.incorrect_guessed_letters, concealed_word)
   end
 
@@ -31,14 +31,14 @@ class Controller
     end
   end
 
-  def check_letter_in_word(letter)
+  def check_letter_in_word(guessed_letter)
     # doing too much 😫
-    if state.letters.include?(letter)
-      state.correct_guessed_letters << letter
+    if state.letters.include?(guessed_letter)
+      state.correct_guessed_letters << guessed_letter
       console_io.correct_letter
     else
-      state.incorrect_guessed_letters << letter
       state.remove_life!
+      state.incorrect_guessed_letters << guessed_letter
       console_io.incorrect_letter
     end
   end
