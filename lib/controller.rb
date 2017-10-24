@@ -33,22 +33,13 @@ class Controller
   end
 
   def valid_letter?(letter)
-    validator.validate(
+    result = validator.validate(
       letter: letter,
       correct_letters: state.correct_letters,
       incorrect_letters: state.incorrect_letters
     )
-
-    # result object, return succes or not / true or false
-    # print message here - result obejct message
-
-    # return result - true or false
-
-    # if valid letter
-    #   return true
-    # if not valid
-    #   retrun false
-
+    console_io.error_message(result.error_type)
+    result.success?
   end
 
   def concealed_word

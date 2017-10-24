@@ -1,20 +1,20 @@
 class LetterValidator
   attr_reader :output
 
-  def initialize(output:)
-    @output = output
+  def initialize; end
+
+  Result = Struct.new(:status, :error_type) do
+    def success?
+      status == :ok
+    end
   end
 
-  # TODO: refactor, result object?
-
-  # 2 concerns, validtin letter and telling outpu class a message
-  # return a symbol
-  # add to consple oi display right error message,
-
-
   def validate(letter:, correct_letters:, incorrect_letters:)
-    error_message(letter, correct_letters, incorrect_letters)
-    valid?(letter, correct_letters, incorrect_letters)
+    if valid?(letter, correct_letters, incorrect_letters)
+      Result.new(:ok, nil)
+    else
+      Result.new(:error, error(letter, correct_letters, incorrect_letters))
+    end
   end
 
   private
@@ -35,13 +35,13 @@ class LetterValidator
     correct_letters.include?(letter) || incorrect_letters.include?(letter)
   end
 
-  def error_message(letter, correct_letters, incorrect_letters)
+  def error(letter, correct_letters, incorrect_letters)
     if !alpha_character?(letter)
-      output.be_a_letter
+      :alpha
     elsif !one_character?(letter)
-      output.pick_only_one_letter
+      :one
     elsif already_tried?(letter, correct_letters, incorrect_letters)
-      output.already_tried_letter
+      :tried
     end
   end
 end
