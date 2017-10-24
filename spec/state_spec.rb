@@ -21,10 +21,10 @@ RSpec.describe State do
     end
   end
 
-  describe "check the state of a game " do
+  describe "check the state of a game" do
     let(:state) { State.new(letters: ["f", "l", "u", "x"]) }
 
-    it "player is lost" do
+    it "player has lost" do
       state.lives = 0
       expect(state.lost?).to eq(true)
     end
@@ -48,20 +48,16 @@ RSpec.describe State do
     end
 
     context "when the game is over" do
-      context "when player has no lives left" do
-        it "return true" do
-          state.lives = 0
-          result = state.game_over?
-          expect(result).to eq(true)
-        end
+      it "player has no lives left" do
+        state.lives = 0
+        result = state.game_over?
+        expect(result).to eq(true)
       end
 
-      context "when player guesses the word" do
-        it "returns true" do
-          allow(state).to receive(:correct_letters).and_return(["f", "l", "u", "x"]) # not sure
-          result = state.game_over?
-          expect(result).to eq(true)
-        end
+      it "player guesses the word" do
+        allow(state).to receive(:correct_letters).and_return(["f", "l", "u", "x"]) # not sure
+        result = state.game_over?
+        expect(result).to eq(true)
       end
     end
   end

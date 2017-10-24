@@ -5,7 +5,7 @@ RSpec.describe LetterValidator do
     let(:validator) { LetterValidator.new }
 
     context "when letter is valid" do
-      it "result object returns true" do
+      it "returns true" do
         result = validator.validate(
           letter: "a",
           letters: []
@@ -15,8 +15,8 @@ RSpec.describe LetterValidator do
     end
 
     context "when letter is not valid" do
-      context "when a number or symbol" do
-        it "result object returns false" do
+      context "when is a number or symbol" do
+        it "returns false" do
           result = validator.validate(
             letter: "3",
             letters: []
@@ -25,8 +25,8 @@ RSpec.describe LetterValidator do
         end
       end
 
-      context "when two or more characters" do
-        it "result object returns false" do
+      context "when is two or more characters" do
+        it "returns false" do
           result = validator.validate(
             letter: "aa",
             letters: []
@@ -36,7 +36,7 @@ RSpec.describe LetterValidator do
       end
 
       context "when has already be tried" do
-        it "result object returns false" do
+        it "returns false" do
           result = validator.validate(
             letter: "a",
             letters: ["a"]

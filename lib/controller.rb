@@ -18,7 +18,7 @@ class Controller
   def play_turn
     console_io.lives_and_letter(state.lives)
     letter = retrieve_user_input
-    check_letter_in_word(letter) # TODO: bad method name 😫
+    check_letter_in_word(letter) # bad method name 😫
     console_io.turn_information(state.incorrect_letters, concealed_word)
   end
 
@@ -32,6 +32,7 @@ class Controller
   end
 
   def check_letter_in_word(letter)
+    # doing too much 😫
     if state.letters.include?(letter)
       state.correct_letters << letter
       console_io.correct_letter
