@@ -10,7 +10,7 @@ class State
   end
 
   def remove_life!
-    # NOTE: why is this not working just as "lives"?
+    # NOTE: why is this not working with just "lives"?
     @lives -= 1
   end
 
