@@ -19,7 +19,7 @@ class Controller
     console_io.lives_and_letter(state.lives)
     letter = retrieve_user_input
     check_letter_in_word(letter) # bad method name 😫
-    console_io.turn_information(state.incorrect_letters, concealed_word)
+    console_io.turn_information(state.incorrect_guessed_letters, concealed_word)
   end
 
   def retrieve_user_input
@@ -34,10 +34,10 @@ class Controller
   def check_letter_in_word(letter)
     # doing too much 😫
     if state.letters.include?(letter)
-      state.correct_letters << letter
+      state.correct_guessed_letters << letter
       console_io.correct_letter
     else
-      state.incorrect_letters << letter
+      state.incorrect_guessed_letters << letter
       state.remove_life!
       console_io.incorrect_letter
     end
@@ -51,10 +51,10 @@ class Controller
   end
 
   def all_letters
-    state.correct_letters.concat(state.incorrect_letters)
+    state.correct_guessed_letters.concat(state.incorrect_guessed_letters)
   end
 
   def concealed_word
-    state.letters.map { |letter| state.correct_letters.include?(letter) ? letter : nil }
+    state.letters.map { |letter| state.correct_guessed_letters.include?(letter) ? letter : nil }
   end
 end

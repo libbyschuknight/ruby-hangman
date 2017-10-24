@@ -13,11 +13,11 @@ RSpec.describe State do
     end
 
     it "has correct letters" do
-      expect(state.correct_letters).to eq([])
+      expect(state.correct_guessed_letters).to eq([])
     end
 
     it "has incorrect letters" do
-      expect(state.incorrect_letters).to eq([])
+      expect(state.incorrect_guessed_letters).to eq([])
     end
   end
 
@@ -35,13 +35,13 @@ RSpec.describe State do
 
     context "when checking the word" do
       it "is correct" do
-        allow(state).to receive(:correct_letters).and_return("flux".chars) # not sure about this??
+        allow(state).to receive(:correct_guessed_letters).and_return("flux".chars) # not sure about this??
         result = state.word_correct?
         expect(result).to eq(true)
       end
 
       it "is not correct" do
-        allow(state).to receive(:correct_letters).and_return(["f"]) # not sure
+        allow(state).to receive(:correct_guessed_letters).and_return(["f"]) # not sure
         result = state.word_correct?
         expect(result).to eq(false)
       end
@@ -55,7 +55,7 @@ RSpec.describe State do
       end
 
       it "player guesses the word" do
-        allow(state).to receive(:correct_letters).and_return(["f", "l", "u", "x"]) # not sure
+        allow(state).to receive(:correct_guessed_letters).and_return(["f", "l", "u", "x"]) # not sure
         result = state.game_over?
         expect(result).to eq(true)
       end

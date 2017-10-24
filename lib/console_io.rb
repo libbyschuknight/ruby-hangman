@@ -13,9 +13,9 @@ class ConsoleIo
     display_concealed_word(concealed_word)
   end
 
-  def turn_information(incorrect_letters, concealed_word)
+  def turn_information(incorrect_guessed_letters, concealed_word)
     print("____________________________")
-    display_incorrect_words(incorrect_letters)
+    display_incorrect_words(incorrect_guessed_letters)
     display_concealed_word(concealed_word)
   end
 
