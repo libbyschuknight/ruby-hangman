@@ -33,6 +33,17 @@ class Controller
 
   def check_letter_in_word(guessed_letter)
     # doing too much 😫
+
+    # 1 checking if letter in word
+    # 2 putting letter in an array
+    # 3 printing a message
+    # 4 removes a life
+
+    correct_letter?(letter)
+
+    correct_guess(letter)
+    incorrect_guess(letter)
+
     if state.letters.include?(guessed_letter)
       state.correct_guessed_letters << guessed_letter
       console_io.correct_letter
