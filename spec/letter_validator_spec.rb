@@ -8,8 +8,7 @@ RSpec.describe LetterValidator do
       it "result object returns true" do
         result = validator.validate(
           letter: "a",
-          correct_letters: [],
-          incorrect_letters: []
+          letters: []
         )
         expect(result.success?).to eq(true)
       end
@@ -20,8 +19,7 @@ RSpec.describe LetterValidator do
         it "result object returns false" do
           result = validator.validate(
             letter: "3",
-            correct_letters: [],
-            incorrect_letters: []
+            letters: []
           )
           expect(result.success?).to eq(false)
         end
@@ -31,8 +29,7 @@ RSpec.describe LetterValidator do
         it "result object returns false" do
           result = validator.validate(
             letter: "aa",
-            correct_letters: [],
-            incorrect_letters: []
+            letters: []
           )
           expect(result.success?).to eq(false)
         end
@@ -42,8 +39,7 @@ RSpec.describe LetterValidator do
         it "result object returns false" do
           result = validator.validate(
             letter: "a",
-            correct_letters: [],
-            incorrect_letters: ["a"]
+            letters: ["a"]
           )
           expect(result.success?).to eq(false)
         end

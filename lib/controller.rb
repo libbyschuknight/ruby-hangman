@@ -18,21 +18,7 @@ class Controller
   def play_turn
     console_io.lives_and_letter(state.lives)
     letter = retrieve_user_input
-
-
-    # move into method
-    # NOTE: not sure about moving into methods and names of methods
-    if state.letters.include?(letter)
-      # collect_and_display_letter(letter)
-      state.correct_letters << letter
-      console_io.correct_letter
-    else
-      # collect_letter_take_live_display_letter(letter)
-      state.incorrect_letters << letter
-      state.remove_life!
-      console_io.incorrect_letter
-    end
-
+    check_letter_in_word(letter) # TODO: bad method name 😫
     console_io.turn_information(state.incorrect_letters, concealed_word)
   end
 
@@ -45,27 +31,29 @@ class Controller
     end
   end
 
+  def check_letter_in_word(letter)
+    if state.letters.include?(letter)
+      state.correct_letters << letter
+      console_io.correct_letter
+    else
+      state.incorrect_letters << letter
+      state.remove_life!
+      console_io.incorrect_letter
+    end
+  end
+
   def valid_letter_result(letter)
     validator.validate(
       letter: letter,
-      # combine arrays
-      correct_letters: state.correct_letters,
-      incorrect_letters: state.incorrect_letters
+      letters: all_letters
     )
+  end
+
+  def all_letters
+    state.correct_letters.concat(state.incorrect_letters)
   end
 
   def concealed_word
     state.letters.map { |letter| state.correct_letters.include?(letter) ? letter : nil }
   end
-
-  # def collect_and_display_letter(letter)
-  #   state.correct_letters << letter
-  #   console_io.correct_letter
-  # end
-  #
-  # def collect_letter_take_live_display_letter(letter)
-  #   state.incorrect_letters << letter
-  #   state.remove_life
-  #   console_io.incorrect_letter
-  # end
 end

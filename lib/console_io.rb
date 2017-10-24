@@ -9,9 +9,8 @@ class ConsoleIo
 
   def start_game_information(concealed_word, lives)
     print("😃   LETS PLAY HANGMAN!!! 😜")
-    print("You have #{lives} lives. ")
+    print("The word is: ")
     display_concealed_word(concealed_word)
-    pick_a_letter
   end
 
   def turn_information(incorrect_letters, concealed_word)

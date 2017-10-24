@@ -9,18 +9,18 @@ class LetterValidator
     end
   end
 
-  def validate(letter:, correct_letters:, incorrect_letters:)
-    if valid?(letter, correct_letters, incorrect_letters)
+  def validate(letter:, letters:)
+    if valid?(letter, letters)
       Result.new(:ok, nil)
     else
-      Result.new(:error, error(letter, correct_letters, incorrect_letters))
+      Result.new(:error, error(letter, letters))
     end
   end
 
   private
 
-  def valid?(letter, correct_letters, incorrect_letters)
-    alpha_character?(letter) && one_character?(letter) && !already_tried?(letter, correct_letters, incorrect_letters)
+  def valid?(letter, letters)
+    alpha_character?(letter) && one_character?(letter) && !already_tried?(letter, letters)
   end
 
   def alpha_character?(letter)
@@ -31,16 +31,16 @@ class LetterValidator
     letter.length == 1
   end
 
-  def already_tried?(letter, correct_letters, incorrect_letters)
-    correct_letters.include?(letter) || incorrect_letters.include?(letter)
+  def already_tried?(letter, letters)
+    letters.include?(letter)
   end
 
-  def error(letter, correct_letters, incorrect_letters)
+  def error(letter, letters)
     if !alpha_character?(letter)
       :alpha
     elsif !one_character?(letter)
       :one
-    elsif already_tried?(letter, correct_letters, incorrect_letters)
+    elsif already_tried?(letter, letters)
       :tried
     end
   end
