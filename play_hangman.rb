@@ -10,8 +10,10 @@ require "state"
 require "word_generator"
 require "letter_validator"
 
+letters = WordGenerator.random_word.chars
+
 new_game = Controller.new(
-  state: State.new(letters: WordGenerator.random_word.chars),
+  state: State.new(letters: letters),
   validator: LetterValidator.new,
   console_io: ConsoleIo.new,
 )

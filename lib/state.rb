@@ -9,10 +9,12 @@ class State
     @incorrect_letters = []
   end
 
-  def remove_life
-    self.lives -= 1
+  def remove_life!
+    # NOTE: why is this not working just as "lives"?
+    @lives -= 1
   end
 
+# lost?
   def dead?
     lives.zero?
   end

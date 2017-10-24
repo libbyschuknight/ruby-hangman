@@ -1,19 +1,11 @@
 require "spec_helper"
 
 RSpec.describe Controller do
-  let(:state) do
-    instance_double(
-      "State",
-      letters: ["f", "l", "u", "x"],
-      lives: 5,
-      correct_letters: [],
-      incorrect_letters: []
-    )
-  end
+  let(:state) { State.new(letters: "flux".chars) }
 
-  let(:validator) { instance_double("LetterValidator") }
+  let(:validator) { LetterValidator.new }
 
-  let(:console_io) { instance_double("ConsoleIo") }
+  let(:console_io) { ConsoleIo.new }
 
   let(:game) do
     Controller.new(
@@ -37,15 +29,20 @@ RSpec.describe Controller do
     end
   end
 
-  xdescribe "playing a game" do
+  describe "playing a game" do
     context "when game is lost" do
-      it "returns something??" do
-        allow(console_io).to receive(:start_game_information)
-        allow(game_service).to receive(:game_over?).and_return(true)
-        allow(console_io).to receive(:lose)
-        result = game.play_game
-        expect(result).to eq("")
-        # expect stdin to eq "lose"
+      it "returns a lose message" do
+        allow(state).to receive(:dead?).and_return(true)
+        expect(console_io).to receive(:lose)
+        game.play_game
+      end
+    end
+
+    context "when game is won" do
+      it "returns a win message" do
+        allow(state).to receive(:word_correct?).and_return(true)
+        expect(console_io).to receive(:win)
+        game.play_game
       end
     end
   end

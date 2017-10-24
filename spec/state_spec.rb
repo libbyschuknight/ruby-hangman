@@ -30,7 +30,7 @@ RSpec.describe State do
     end
 
     it "descreases number of lives" do
-      expect { state.remove_life }.to change { state.lives }.by(-1)
+      expect { state.remove_life! }.to change { state.lives }.by(-1)
     end
 
     context "when checking the word" do
