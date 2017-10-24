@@ -16,6 +16,7 @@ class Controller
   private
 
   def play_turn
+    console_io.lives_and_letter(state.lives)
     letter = retrieve_user_input
 
 
@@ -32,8 +33,7 @@ class Controller
       console_io.incorrect_letter
     end
 
-
-    turn_information
+    console_io.turn_information(state.incorrect_letters, concealed_word)
   end
 
   def retrieve_user_input
@@ -68,11 +68,4 @@ class Controller
   #   state.remove_life
   #   console_io.incorrect_letter
   # end
-
-  def turn_information
-    # print at start of turn
-    # refactor console io back to what was
-    console_io.turn_information(state.incorrect_letters, concealed_word)
-    console_io.lives_and_letter(state.lives) unless state.game_over?
-  end
 end
