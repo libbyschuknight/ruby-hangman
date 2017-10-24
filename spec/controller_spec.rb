@@ -32,7 +32,7 @@ RSpec.describe Controller do
   describe "playing a game" do
     context "when game is lost" do
       it "returns a lose message" do
-        allow(state).to receive(:dead?).and_return(true)
+        allow(state).to receive(:lost?).and_return(true)
         expect(console_io).to receive(:lose)
         game.play_game
       end

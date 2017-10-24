@@ -10,7 +10,7 @@ class Controller
   def play_game
     console_io.start_game_information(concealed_word, state.lives)
     play_turn until state.game_over?
-    state.dead? ? console_io.lose : console_io.win
+    state.lost? ? console_io.lose : console_io.win
   end
 
   private

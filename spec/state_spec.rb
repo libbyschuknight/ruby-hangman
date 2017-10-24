@@ -24,9 +24,9 @@ RSpec.describe State do
   describe "check the state of a game " do
     let(:state) { State.new(letters: ["f", "l", "u", "x"]) }
 
-    it "player is dead" do
+    it "player is lost" do
       state.lives = 0
-      expect(state.dead?).to eq(true)
+      expect(state.lost?).to eq(true)
     end
 
     it "descreases number of lives" do
@@ -48,7 +48,7 @@ RSpec.describe State do
     end
 
     context "when the game is over" do
-      context "when player has died" do
+      context "when player has no lives left" do
         it "return true" do
           state.lives = 0
           result = state.game_over?

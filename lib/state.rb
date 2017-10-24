@@ -14,8 +14,7 @@ class State
     @lives -= 1
   end
 
-# lost?
-  def dead?
+  def lost?
     lives.zero?
   end
 
@@ -24,6 +23,6 @@ class State
   end
 
   def game_over?
-    dead? || word_correct?
+    lost? || word_correct?
   end
 end
