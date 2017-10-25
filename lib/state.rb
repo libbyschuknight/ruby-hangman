@@ -28,4 +28,8 @@ class State
   def concealed_word
     letters.map { |letter| correct_guessed_letters.include?(letter) ? letter : nil }
   end
+
+  def all_letters
+    correct_guessed_letters | incorrect_guessed_letters
+  end
 end

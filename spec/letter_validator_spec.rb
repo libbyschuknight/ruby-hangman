@@ -3,12 +3,18 @@ require "spec_helper"
 RSpec.describe LetterValidator do
   describe "validating a letter" do
     let(:validator) { LetterValidator.new }
+    let(:state) do
+      instance_double(
+        "State",
+        all_letters: []
+      )
+    end
 
     context "when letter is valid" do
       it "returns true" do
         result = validator.validate(
           letter: "a",
-          letters: []
+          game_state: state
         )
         expect(result.success?).to eq(true)
       end
@@ -19,7 +25,7 @@ RSpec.describe LetterValidator do
         it "returns false" do
           result = validator.validate(
             letter: "3",
-            letters: []
+            game_state: state
           )
           expect(result.success?).to eq(false)
         end
@@ -29,7 +35,7 @@ RSpec.describe LetterValidator do
         it "returns false" do
           result = validator.validate(
             letter: "aa",
-            letters: []
+            game_state: state
           )
           expect(result.success?).to eq(false)
         end
@@ -37,9 +43,10 @@ RSpec.describe LetterValidator do
 
       context "when has already be tried" do
         it "returns false" do
+          state = instance_double("State", all_letters: ["a"])
           result = validator.validate(
             letter: "a",
-            letters: ["a"]
+            game_state: state
           )
           expect(result.success?).to eq(false)
         end

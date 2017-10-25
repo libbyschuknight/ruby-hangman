@@ -32,10 +32,7 @@ class Controller
   end
 
   def valid_letter_result(letter)
-    validator.validate(
-      letter: letter,
-      letters: all_letters
-    )
+    validator.validate(letter: letter, game_state: state)
   end
 
   def correct_letter?(guessed_letter)
@@ -51,9 +48,5 @@ class Controller
     state.remove_life!
     state.incorrect_guessed_letters << guessed_letter
     console_io.incorrect_letter
-  end
-
-  def all_letters
-    state.correct_guessed_letters.concat(state.incorrect_guessed_letters)
   end
 end

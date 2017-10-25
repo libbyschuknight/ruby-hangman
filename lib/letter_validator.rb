@@ -1,6 +1,4 @@
 class LetterValidator
-  attr_reader :output
-
   def initialize; end
 
   Result = Struct.new(:status, :error_type) do
@@ -9,11 +7,11 @@ class LetterValidator
     end
   end
 
-  def validate(letter:, letters:)
-    if valid?(letter, letters)
+  def validate(letter:, game_state:)
+    if valid?(letter, game_state.all_letters)
       Result.new(:ok, nil)
     else
-      Result.new(:error, error(letter, letters))
+      Result.new(:error, error(letter, game_state.all_letters))
     end
   end
 
