@@ -8,7 +8,7 @@ class Controller
   end
 
   def play_game
-    console_io.start_game_information(concealed_word, state.lives)
+    console_io.start_game_information(state.concealed_word, state.lives)
     play_turn until state.game_over?
     state.lost? ? console_io.lose : console_io.win
   end
@@ -19,7 +19,7 @@ class Controller
     console_io.lives_and_letter(state.lives)
     guessed_letter = retrieve_user_input
     correct_letter?(guessed_letter) ? correct_guess(guessed_letter) : incorrect_guess(guessed_letter)
-    console_io.turn_information(state.incorrect_guessed_letters, concealed_word)
+    console_io.turn_information(state.incorrect_guessed_letters, state.concealed_word)
   end
 
   def retrieve_user_input
@@ -55,9 +55,5 @@ class Controller
 
   def all_letters
     state.correct_guessed_letters.concat(state.incorrect_guessed_letters)
-  end
-
-  def concealed_word
-    state.letters.map { |letter| state.correct_guessed_letters.include?(letter) ? letter : nil }
   end
 end

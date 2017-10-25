@@ -24,4 +24,8 @@ class State
   def game_over?
     lost? || word_correct?
   end
+
+  def concealed_word
+    letters.map { |letter| correct_guessed_letters.include?(letter) ? letter : nil }
+  end
 end
