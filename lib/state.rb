@@ -10,7 +10,6 @@ class State
   end
 
   def remove_life!
-    # NOTE: why is this not working with just "lives"? works with self
     self.lives -= 1
   end
 

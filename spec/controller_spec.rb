@@ -2,13 +2,11 @@ require "spec_helper"
 
 RSpec.describe Controller do
   let(:state) { State.new(letters: "flux".chars) }
-
   let(:validator) { LetterValidator.new }
-
   let(:console_io) { ConsoleIo.new }
 
-  let(:game) do
-    Controller.new(
+  subject(:game) do
+    described_class.new(
       state: state,
       validator: validator,
       console_io: console_io
@@ -32,6 +30,7 @@ RSpec.describe Controller do
   describe "playing a game" do
     context "when game is lost" do
       it "returns a lose message" do
+        # allow(state).to receive(:lost?).and_return(true)
         state.lives = 0
         expect(console_io).to receive(:lose)
         game.play_game
@@ -41,9 +40,6 @@ RSpec.describe Controller do
     context "when game is won" do
       it "returns a win message" do
         # allow(state).to receive(:word_correct?).and_return(true)
-
-        # not working as correct_guessed_letters is only an attr_reader
-        state.correct_guessed_letters = "flux".chars
 
         expect(console_io).to receive(:win)
         game.play_game
